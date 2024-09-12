@@ -14,7 +14,8 @@ plugins {
 
 runPaper.folia.registerTask()
 
-val supportedVersions = listOf("1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1")
+val supportedVersions =
+    listOf("1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1")
 
 allprojects {
     group = "de.oliver"
@@ -37,8 +38,10 @@ dependencies {
     implementation(project(":api"))
 
     implementation("de.oliver:FancyLib:${findProperty("fancyLibVersion")}")
-    compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
     implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
+    compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
+    compileOnly("net.luckperms:api:5.4")
+
     implementation("org.incendo:cloud-core:${findProperty("cloudCoreVersion")}")
     implementation("org.incendo:cloud-paper:${findProperty("cloudPaperVersion")}")
     implementation("org.incendo:cloud-annotations:${findProperty("cloudAnnotationsVersion")}")
