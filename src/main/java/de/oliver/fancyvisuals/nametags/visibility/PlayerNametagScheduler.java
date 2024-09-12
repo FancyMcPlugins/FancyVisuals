@@ -18,16 +18,6 @@ public class PlayerNametagScheduler {
     private final ScheduledExecutorService schedulerExecutor;
 
     /**
-     * ExecutorService instance used for executing tasks related to
-     * PlayerNametag operations. It uses a fixed thread pool to manage
-     * the creation and execution of threads, ensuring that
-     * multiple PlayerNametag tasks can run concurrently without exceeding
-     * a specified number of threads. This helps in managing system resources
-     * efficiently and preventing unnecessary load on the server.
-     */
-    private final ExecutorService workerExecutor;
-
-    /**
      * DistributedWorkload instance responsible for managing and executing tasks related
      * to PlayerNametag objects. It divides the tasks across multiple buckets and performs
      * specified actions on each element. Actions include updating visibility and checking
@@ -35,20 +25,12 @@ public class PlayerNametagScheduler {
      */
     private final DistributedWorkload<PlayerNametag> workload;
 
-    public PlayerNametagScheduler(int amountWorkerThreads, int bucketSize) {
+    public PlayerNametagScheduler(ExecutorService workerExecutor, int bucketSize) {
         this.schedulerExecutor = Executors.newSingleThreadScheduledExecutor(
                 new ThreadFactoryBuilder()
                         .setNameFormat("PlayerNametagScheduler")
                         .build()
         );
-
-        this.workerExecutor = Executors.newFixedThreadPool(
-                amountWorkerThreads,
-                new ThreadFactoryBuilder()
-                        .setNameFormat("PlayerNametagWorker")
-                        .build()
-        );
-
 
         this.workload = new DistributedWorkload<>(
                 "PlayerNametagWorkload",
