@@ -1,6 +1,7 @@
 package de.oliver.fancyvisuals;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import de.oliver.fancyvisuals.analytics.AnalyticsManager;
 import de.oliver.fancyvisuals.api.FancyVisualsAPI;
 import de.oliver.fancyvisuals.api.nametags.NametagRepository;
 import de.oliver.fancyvisuals.config.FancyVisualsConfig;
@@ -15,6 +16,7 @@ import java.util.concurrent.Executors;
 public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     private static FancyVisuals instance;
+    private final AnalyticsManager analyticsManager;
     private final FancyVisualsConfig fancyVisualsConfig;
     private final NametagConfig nametagConfig;
     private ExecutorService workerExecutor;
@@ -22,6 +24,7 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     public FancyVisuals() {
         instance = this;
+        this.analyticsManager = new AnalyticsManager("oliver", "fancyvisuals", "123456");
         this.fancyVisualsConfig = new FancyVisualsConfig();
         this.nametagConfig = new NametagConfig();
     }
@@ -32,6 +35,8 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     @Override
     public void onLoad() {
+        analyticsManager.init();
+
         fancyVisualsConfig.load();
         nametagConfig.load();
 
