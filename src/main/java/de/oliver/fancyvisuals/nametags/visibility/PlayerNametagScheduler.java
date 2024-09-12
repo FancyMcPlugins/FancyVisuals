@@ -35,7 +35,7 @@ public class PlayerNametagScheduler {
      */
     private final DistributedWorkload<PlayerNametag> workload;
 
-    public PlayerNametagScheduler() {
+    public PlayerNametagScheduler(int amountWorkerThreads, int bucketSize) {
         this.schedulerExecutor = Executors.newSingleThreadScheduledExecutor(
                 new ThreadFactoryBuilder()
                         .setNameFormat("PlayerNametagScheduler")
@@ -43,7 +43,7 @@ public class PlayerNametagScheduler {
         );
 
         this.workerExecutor = Executors.newFixedThreadPool(
-                10,
+                amountWorkerThreads,
                 new ThreadFactoryBuilder()
                         .setNameFormat("PlayerNametagWorker")
                         .build()
@@ -54,7 +54,7 @@ public class PlayerNametagScheduler {
                 "PlayerNametagWorkload",
                 this::updateVisibility,
                 (nt) -> !shouldUpdate(nt),
-                5,
+                bucketSize,
                 workerExecutor
         );
     }
