@@ -6,6 +6,8 @@ import de.oliver.fancysitula.api.entities.FS_TextDisplay;
 import de.oliver.fancysitula.factories.FancySitula;
 import de.oliver.fancyvisuals.api.nametags.Nametag;
 import me.dave.chatcolorhandler.ModernChatColorHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.HashSet;
@@ -25,6 +27,42 @@ public class PlayerNametag {
         this.player = player;
         this.viewers = new HashSet<>();
         this.fsTextDisplay = new FS_TextDisplay();
+    }
+
+    public void updateVisibilityForAll() {
+        for (Player viewer : Bukkit.getOnlinePlayers()) {
+            boolean should = shouldBeVisibleTo(viewer);
+            boolean is = isVisibleTo(viewer);
+
+            if (should && !is) {
+                showTo(viewer);
+            } else if (!should && is) {
+                hideFrom(viewer);
+            }
+        }
+
+    }
+
+    private boolean shouldBeVisibleTo(Player viewer) {
+        if (!player.isOnline()) {
+            return false;
+        }
+
+        if (!viewer.getLocation().getWorld().getName().equals(player.getLocation().getWorld().getName())) {
+            return false;
+        }
+
+        boolean dead = player.isDead();
+        if (dead) {
+            return false;
+        }
+
+        boolean inDistance = isInDistance(viewer.getLocation(), player.getLocation(), 24);
+        if (!inDistance) {
+            return false;
+        }
+
+        return true;
     }
 
     public void showTo(Player viewer) {
@@ -85,5 +123,9 @@ public class PlayerNametag {
 
     public Set<UUID> getViewers() {
         return viewers;
+    }
+
+    private boolean isInDistance(Location loc1, Location loc2, double distance) {
+        return loc1.distanceSquared(loc2) <= distance * distance;
     }
 }
