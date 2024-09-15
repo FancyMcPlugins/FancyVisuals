@@ -30,6 +30,8 @@ public class PlayerNametag {
     }
 
     public void updateVisibilityForAll() {
+        cleanViewers();
+        
         for (Player viewer : Bukkit.getOnlinePlayers()) {
             boolean should = shouldBeVisibleTo(viewer);
             boolean is = isVisibleTo(viewer);
@@ -111,6 +113,13 @@ public class PlayerNametag {
 
     public boolean isVisibleTo(Player viewer) {
         return viewers.contains(viewer.getUniqueId());
+    }
+
+    public void cleanViewers() {
+        viewers.removeIf(uuid -> {
+            Player player = Bukkit.getPlayer(uuid);
+            return player == null || !player.isOnline() || !player.getWorld().getName().equals(this.player.getWorld().getName());
+        });
     }
 
     public Nametag getNametag() {
