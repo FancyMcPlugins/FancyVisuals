@@ -38,6 +38,7 @@ dependencies {
     implementation(project(":api"))
 
     implementation("de.oliver:FancyLib:${findProperty("fancyLibVersion")}")
+    implementation("de.oliver:FancySitula:${findProperty("fancySitulaVersion")}")
     implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
     compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
 
@@ -50,7 +51,7 @@ dependencies {
 paper {
     main = "de.oliver.fancyvisuals.FancyVisuals"
     bootstrapper = "de.oliver.fancyvisuals.loaders.FancyVisualsBootstrapper"
-    loader = "de.oliver.fancyvisuals.loaders.loadersLoader"
+    loader = "de.oliver.fancyvisuals.loaders.FancyVisualsLoader"
     foliaSupported = true
     version = rootProject.version.toString()
     description = "Simple, lightweight and fast visuals plugin using packets"

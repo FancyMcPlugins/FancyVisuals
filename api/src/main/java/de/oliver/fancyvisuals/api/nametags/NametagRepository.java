@@ -17,7 +17,7 @@ public interface NametagRepository {
      * The default {@code Nametag} instance used when no specific nametag is found for a given context or player.
      */
     Nametag DEFAULT_NAMETAG = new Nametag(
-            List.of("%PLAYER_NAME%")
+            List.of("<gradient:#8c0010:#803c12>%player_name%</gradient>", "<reset>")
     );
 
     /**
