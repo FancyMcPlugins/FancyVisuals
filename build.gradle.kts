@@ -41,6 +41,7 @@ dependencies {
     implementation("de.oliver:FancyLib:${findProperty("fancyLibVersion")}")
     implementation("de.oliver:FancySitula:${findProperty("fancySitulaVersion")}")
     implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
+    implementation("de.oliver.FancyAnalytics:logger:${findProperty("fancyLoggerVersion")}")
     compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
     compileOnly("com.github.MilkBowl:VaultAPI:${findProperty("vaultApiVersion")}")
 

@@ -1,7 +1,8 @@
 package de.oliver.fancyvisuals;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import de.oliver.fancysitula.api.packets.FS_ClientboundPacket;
+import de.oliver.fancyanalytics.logger.LogLevel;
+import de.oliver.fancysitula.api.IFancySitula;
 import de.oliver.fancyvisuals.analytics.AnalyticsManager;
 import de.oliver.fancyvisuals.api.FancyVisualsAPI;
 import de.oliver.fancyvisuals.api.nametags.NametagRepository;
@@ -42,7 +43,7 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     @Override
     public void onLoad() {
-        FS_ClientboundPacket.enableDebugLogs(); //TODO remove in release
+        IFancySitula.LOGGER.setCurrentLevel(LogLevel.DEBUG);
 
         analyticsManager.init();
 
