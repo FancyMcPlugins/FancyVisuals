@@ -10,6 +10,7 @@ import de.oliver.fancyvisuals.config.NametagConfig;
 import de.oliver.fancyvisuals.nametags.fake.FakeNametagRepository;
 import de.oliver.fancyvisuals.nametags.listeners.NametagListeners;
 import de.oliver.fancyvisuals.nametags.visibility.PlayerNametagScheduler;
+import de.oliver.fancyvisuals.utils.VaultHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -63,6 +64,9 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
     @Override
     public void onEnable() {
         PluginManager pluginManager = Bukkit.getPluginManager();
+
+        // Vault
+        VaultHelper.loadVault();
 
         // Nametags
         nametagScheduler.init();

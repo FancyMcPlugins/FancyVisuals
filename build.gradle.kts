@@ -29,6 +29,7 @@ allprojects {
         maven(url = "https://repo.papermc.io/repository/maven-public/")
         maven(url = "https://repo.fancyplugins.de/releases")
         maven(url = "https://repo.smrt-1.com/releases")
+        maven(url = "https://jitpack.io")
     }
 }
 
@@ -41,6 +42,7 @@ dependencies {
     implementation("de.oliver:FancySitula:${findProperty("fancySitulaVersion")}")
     implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
     compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
+    compileOnly("com.github.MilkBowl:VaultAPI:${findProperty("vaultApiVersion")}")
 
     implementation("org.incendo:cloud-core:${findProperty("cloudCoreVersion")}")
     implementation("org.incendo:cloud-paper:${findProperty("cloudPaperVersion")}")
@@ -66,6 +68,10 @@ paper {
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
         }
         register("LuckPerms") {
+            required = false
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
+        }
+        register("PermissionsEx") {
             required = false
             load = PaperPluginDescription.RelativeLoadOrder.BEFORE
         }

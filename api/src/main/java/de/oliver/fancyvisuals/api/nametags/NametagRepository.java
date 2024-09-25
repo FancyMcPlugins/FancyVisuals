@@ -47,28 +47,6 @@ public interface NametagRepository {
      * @param player the Player for whom the nametag is being retrieved
      * @return the Nametag associated with the player, or a default nametag if no specific nametag is found
      */
-    default @NotNull Nametag getNametagForPlayer(@NotNull Player player) {
-        Nametag nametag = getNametag(Context.PLAYER, player.getUniqueId().toString());
-        if (nametag != null) {
-            return nametag;
-        }
-
-        nametag = getNametag(Context.GROUP, player.getUniqueId().toString());
-        if (nametag != null) {
-            return nametag;
-        }
-
-        nametag = getNametag(Context.WORLD, player.getWorld().getName());
-        if (nametag != null) {
-            return nametag;
-        }
-
-        nametag = getNametag(Context.SERVER, "global");
-        if (nametag != null) {
-            return nametag;
-        }
-
-        return DEFAULT_NAMETAG;
-    }
+    @NotNull Nametag getNametagForPlayer(@NotNull Player player);
 
 }
