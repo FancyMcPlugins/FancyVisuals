@@ -9,7 +9,10 @@ import de.oliver.fancyvisuals.utils.VaultHelper;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class JsonNametagRepository implements NametagRepository {
@@ -25,6 +28,8 @@ public class JsonNametagRepository implements NametagRepository {
         for (Context ctx : Context.values()) {
             stores.put(ctx, new JsonNametagStore(jdb, ctx));
         }
+
+        initialConfig();
     }
 
     @Override
@@ -58,5 +63,57 @@ public class JsonNametagRepository implements NametagRepository {
         }
 
         return DEFAULT_NAMETAG;
+    }
+
+    private void initialConfig() {
+        File baseDir = new File(BASE_PATH);
+        if (baseDir.exists()) {
+            return;
+        }
+
+        NametagStore serverStore = getStore(Context.SERVER);
+        serverStore.setNametag("global", DEFAULT_NAMETAG);
+
+        NametagStore worldStore = getStore(Context.WORLD);
+        worldStore.setNametag("world", new Nametag(
+                List.of("Overworld", "%player%"),
+                "#C800AA00",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
+        worldStore.setNametag("world_nether", new Nametag(
+                List.of("Nether", "%player%"),
+                "#C8AA0000",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
+        worldStore.setNametag("world_the_end", new Nametag(
+                List.of("The End", "%player%"),
+                "#C80000AA",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
+
+        NametagStore groupStore = getStore(Context.GROUP);
+        groupStore.setNametag("admin", new Nametag(
+                List.of("Admin", "%player%"),
+                "#C8FF0000",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
+        groupStore.setNametag("moderator", new Nametag(
+                List.of("Mod", "%player%"),
+                "#C8FFAA00",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
+
+        NametagStore playerStore = getStore(Context.PLAYER);
+        playerStore.setNametag(UUID.randomUUID().toString(), new Nametag(
+                List.of("Player", "%player%"),
+                "#C800FF00",
+                true,
+                Nametag.TextAlignment.CENTER
+        ));
     }
 }

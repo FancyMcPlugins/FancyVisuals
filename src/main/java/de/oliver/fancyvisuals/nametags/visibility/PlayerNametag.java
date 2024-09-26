@@ -7,6 +7,7 @@ import de.oliver.fancysitula.factories.FancySitula;
 import de.oliver.fancyvisuals.api.nametags.Nametag;
 import me.dave.chatcolorhandler.ModernChatColorHandler;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -31,7 +32,7 @@ public class PlayerNametag {
 
     public void updateVisibilityForAll() {
         cleanViewers();
-        
+
         for (Player viewer : Bukkit.getOnlinePlayers()) {
             boolean should = shouldBeVisibleTo(viewer);
             boolean is = isVisibleTo(viewer);
@@ -85,17 +86,29 @@ public class PlayerNametag {
 
     public void updateFor(Player viewer) {
         fsTextDisplay.setBillboard(FS_Display.Billboard.CENTER);
-        fsTextDisplay.setBackground(0x0);
+
+        Color bgColor = Color.fromARGB((int) Long.parseLong(nametag.backgroundColor().substring(1), 16));
+        fsTextDisplay.setBackground(bgColor.asARGB());
 
         fsTextDisplay.setStyleFlags((byte) 0);
-        fsTextDisplay.setShadow(true);
+
+        fsTextDisplay.setShadow(nametag.textShadow());
+
+        switch (nametag.textAlignment()) {
+            case LEFT -> fsTextDisplay.setAlignLeft(true);
+            case RIGHT -> fsTextDisplay.setAlignRight(true);
+            case CENTER -> {
+                fsTextDisplay.setAlignLeft(false);
+                fsTextDisplay.setAlignRight(false);
+            }
+        }
 
         StringBuilder text = new StringBuilder();
         for (String line : nametag.lines()) {
             text.append(line).append('\n');
         }
+        text.append("<reset>");
 
-        text.deleteCharAt(text.length() - 1);
         fsTextDisplay.setText(ModernChatColorHandler.translate(text.toString(), player));
 
         FS_RealPlayer fsViewer = new FS_RealPlayer(viewer);
