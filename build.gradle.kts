@@ -42,9 +42,10 @@ dependencies {
     implementation("de.oliver:FancySitula:${findProperty("fancySitulaVersion")}")
     implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
     implementation("de.oliver.FancyAnalytics:logger:${findProperty("fancyLoggerVersion")}")
-    compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
+    implementation("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
     compileOnly("com.github.MilkBowl:VaultAPI:${findProperty("vaultApiVersion")}")
 
+    // commands
     implementation("org.incendo:cloud-core:${findProperty("cloudCoreVersion")}")
     implementation("org.incendo:cloud-paper:${findProperty("cloudPaperVersion")}")
     implementation("org.incendo:cloud-annotations:${findProperty("cloudAnnotationsVersion")}")

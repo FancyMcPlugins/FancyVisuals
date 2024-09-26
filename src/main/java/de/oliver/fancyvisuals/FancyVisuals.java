@@ -1,6 +1,7 @@
 package de.oliver.fancyvisuals;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import de.oliver.fancyanalytics.logger.LogLevel;
 import de.oliver.fancysitula.api.IFancySitula;
 import de.oliver.fancyvisuals.analytics.AnalyticsManager;
@@ -8,19 +9,21 @@ import de.oliver.fancyvisuals.api.FancyVisualsAPI;
 import de.oliver.fancyvisuals.api.nametags.NametagRepository;
 import de.oliver.fancyvisuals.config.FancyVisualsConfig;
 import de.oliver.fancyvisuals.config.NametagConfig;
-import de.oliver.fancyvisuals.nametags.fake.FakeNametagRepository;
 import de.oliver.fancyvisuals.nametags.listeners.NametagListeners;
+import de.oliver.fancyvisuals.nametags.store.JsonNametagRepository;
 import de.oliver.fancyvisuals.nametags.visibility.PlayerNametagScheduler;
 import de.oliver.fancyvisuals.utils.VaultHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
+    private static final ExtendedFancyLogger logger = IFancySitula.LOGGER;
     private static FancyVisuals instance;
     private final AnalyticsManager analyticsManager;
     private final FancyVisualsConfig fancyVisualsConfig;
@@ -41,6 +44,10 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
         return instance;
     }
 
+    public static @NotNull ExtendedFancyLogger getFancyLogger() {
+        return logger;
+    }
+
     @Override
     public void onLoad() {
         IFancySitula.LOGGER.setCurrentLevel(LogLevel.DEBUG);
@@ -58,7 +65,7 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
         );
 
         // Nametags
-        nametagRepository = new FakeNametagRepository(); //TODO implement real repository
+        nametagRepository = new JsonNametagRepository();
         nametagScheduler = new PlayerNametagScheduler(workerExecutor, nametagConfig.getDistributionBucketSize());
     }
 

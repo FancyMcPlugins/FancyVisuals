@@ -1,0 +1,67 @@
+package de.oliver.fancyvisuals.nametags.store;
+
+import de.oliver.fancylib.jdb.JDB;
+import de.oliver.fancyvisuals.FancyVisuals;
+import de.oliver.fancyvisuals.api.Context;
+import de.oliver.fancyvisuals.api.nametags.Nametag;
+import de.oliver.fancyvisuals.api.nametags.NametagStore;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class JsonNametagStore implements NametagStore {
+
+    private final Context context;
+    private final JDB jdb;
+
+    public JsonNametagStore(JDB jdb, Context context) {
+        this.jdb = jdb;
+        this.context = context;
+    }
+
+    @Override
+    public void setNametag(@NotNull String id, @NotNull Nametag nametag) {
+        try {
+            jdb.set(context.name() + "/" + id, nametag);
+        } catch (IOException e) {
+            FancyVisuals.getFancyLogger().error("Failed to set nametag for id " + id);
+            FancyVisuals.getFancyLogger().error(e);
+        }
+    }
+
+    @Override
+    public @Nullable Nametag getNametag(@NotNull String id) {
+        Nametag nametag = null;
+
+        try {
+            nametag = jdb.get(context.name() + "/" + id, Nametag.class);
+        } catch (IOException e) {
+            FancyVisuals.getFancyLogger().error("Failed to get nametag for id " + id);
+            FancyVisuals.getFancyLogger().error(e);
+        }
+
+        return nametag;
+    }
+
+    @Override
+    public void removeNametag(@NotNull String id) {
+        jdb.delete(context.name() + "/" + id);
+    }
+
+    @Override
+    public @NotNull List<Nametag> getNametags() {
+        List<Nametag> nametags = new ArrayList<>();
+
+        try {
+            jdb.getAll(context.name(), Nametag.class);
+        } catch (IOException e) {
+            FancyVisuals.getFancyLogger().error("Failed to get all nametags");
+            FancyVisuals.getFancyLogger().error(e);
+        }
+
+        return nametags;
+    }
+}

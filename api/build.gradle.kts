@@ -8,14 +8,12 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:${findProperty("minecraftVersion")}-R0.1-SNAPSHOT")
 
     compileOnly("de.oliver:FancyLib:${findProperty("fancyLibVersion")}")
-    implementation("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
+    compileOnly("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
 }
 
 tasks {
     shadowJar {
         archiveClassifier.set("")
-
-        relocate("me.dave.chatcolorhandler", "de.oliver.fancyvisuals.libs.chatcolorhandler")
     }
 
     publishing {
