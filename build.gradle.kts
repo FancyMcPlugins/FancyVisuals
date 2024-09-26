@@ -38,18 +38,19 @@ dependencies {
 
     implementation(project(":api"))
 
-    implementation("de.oliver:FancyLib:${findProperty("fancyLibVersion")}")
-    implementation("de.oliver:FancySitula:${findProperty("fancySitulaVersion")}")
-    implementation("de.oliver.FancyAnalytics:api:${findProperty("fancyAnalyticsVersion")}")
-    implementation("de.oliver.FancyAnalytics:logger:${findProperty("fancyLoggerVersion")}")
-    implementation("me.dave:ChatColorHandler:${findProperty("chatcolorhandlerVersion")}")
-    compileOnly("com.github.MilkBowl:VaultAPI:${findProperty("vaultApiVersion")}")
+    compileOnly("de.oliver:FancyLib:33") // loaded in FancyVisualLoader
+    compileOnly("de.oliver:FancySitula:0.0.9") // loaded in FancyVisualLoader
+    compileOnly("de.oliver.FancyAnalytics:api:0.0.8") // loaded in FancyVisualLoader
+    compileOnly("de.oliver.FancyAnalytics:logger:0.0.5") // loaded in FancyVisualLoader
+
+    implementation("me.dave:ChatColorHandler:v2.5.3")
+    compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
     // commands
-    implementation("org.incendo:cloud-core:${findProperty("cloudCoreVersion")}")
-    implementation("org.incendo:cloud-paper:${findProperty("cloudPaperVersion")}")
-    implementation("org.incendo:cloud-annotations:${findProperty("cloudAnnotationsVersion")}")
-    annotationProcessor("org.incendo:cloud-annotations:${findProperty("cloudAnnotationsVersion")}")
+    compileOnly("org.incendo:cloud-core:2.0.0") // loaded in FancyVisualLoader
+    compileOnly("org.incendo:cloud-paper:2.0.0-beta.10") // loaded in FancyVisualLoader
+    compileOnly("org.incendo:cloud-annotations:2.0.0") // loaded in FancyVisualLoader
+    annotationProcessor("org.incendo:cloud-annotations:2.0.0")
 }
 
 paper {

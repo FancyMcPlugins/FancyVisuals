@@ -3,6 +3,7 @@ package de.oliver.fancyvisuals;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import de.oliver.fancyanalytics.logger.ExtendedFancyLogger;
 import de.oliver.fancyanalytics.logger.LogLevel;
+import de.oliver.fancylib.FancyLib;
 import de.oliver.fancysitula.api.IFancySitula;
 import de.oliver.fancyvisuals.analytics.AnalyticsManager;
 import de.oliver.fancyvisuals.api.FancyVisualsAPI;
@@ -53,6 +54,7 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     @Override
     public void onLoad() {
+        FancyLib fancyLib = new FancyLib(this);
         IFancySitula.LOGGER.setCurrentLevel(LogLevel.DEBUG);
 
         // config
