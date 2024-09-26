@@ -28,7 +28,7 @@ allprojects {
         mavenCentral()
         maven(url = "https://repo.papermc.io/repository/maven-public/")
         maven(url = "https://repo.fancyplugins.de/releases")
-        maven(url = "https://repo.smrt-1.com/releases")
+        maven(url = "https://repo.lushplugins.org/releases")
         maven(url = "https://jitpack.io")
     }
 }
@@ -43,7 +43,7 @@ dependencies {
     compileOnly("de.oliver.FancyAnalytics:api:0.0.8") // loaded in FancyVisualLoader
     compileOnly("de.oliver.FancyAnalytics:logger:0.0.5") // loaded in FancyVisualLoader
 
-    implementation("me.dave:ChatColorHandler:v2.5.3")
+    implementation("org.lushplugins:ChatColorHandler:4.0.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
     // commands

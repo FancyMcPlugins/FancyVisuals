@@ -7,11 +7,11 @@ import de.oliver.fancysitula.factories.FancySitula;
 import de.oliver.fancyvisuals.FancyVisuals;
 import de.oliver.fancyvisuals.api.nametags.Nametag;
 import de.oliver.fancyvisuals.playerConfig.PlayerConfig;
-import me.dave.chatcolorhandler.ModernChatColorHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.lushplugins.chatcolorhandler.ModernChatColorHandler;
 
 import java.util.HashSet;
 import java.util.List;
