@@ -12,6 +12,7 @@ import de.oliver.fancyvisuals.config.NametagConfig;
 import de.oliver.fancyvisuals.nametags.listeners.NametagListeners;
 import de.oliver.fancyvisuals.nametags.store.JsonNametagRepository;
 import de.oliver.fancyvisuals.nametags.visibility.PlayerNametagScheduler;
+import de.oliver.fancyvisuals.playerConfig.JsonPlayerConfigStore;
 import de.oliver.fancyvisuals.utils.VaultHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -29,6 +30,8 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
     private final FancyVisualsConfig fancyVisualsConfig;
     private final NametagConfig nametagConfig;
     private ExecutorService workerExecutor;
+
+    private JsonPlayerConfigStore playerConfigStore;
 
     private NametagRepository nametagRepository;
     private PlayerNametagScheduler nametagScheduler;
@@ -64,6 +67,10 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
                         .build()
         );
 
+
+        // Player config
+        playerConfigStore = new JsonPlayerConfigStore();
+
         // Nametags
         nametagRepository = new JsonNametagRepository();
         nametagScheduler = new PlayerNametagScheduler(workerExecutor, nametagConfig.getDistributionBucketSize());
@@ -89,6 +96,10 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
     @Override
     public JavaPlugin getPlugin() {
         return instance;
+    }
+
+    public JsonPlayerConfigStore getPlayerConfigStore() {
+        return playerConfigStore;
     }
 
     @Override

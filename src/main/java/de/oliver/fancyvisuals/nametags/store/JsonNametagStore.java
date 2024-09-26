@@ -25,7 +25,7 @@ public class JsonNametagStore implements NametagStore {
     @Override
     public void setNametag(@NotNull String id, @NotNull Nametag nametag) {
         try {
-            jdb.set(context.name() + "/" + id, nametag);
+            jdb.set(context.getName() + "/" + id, nametag);
         } catch (IOException e) {
             FancyVisuals.getFancyLogger().error("Failed to set nametag for id " + id);
             FancyVisuals.getFancyLogger().error(e);
@@ -37,7 +37,7 @@ public class JsonNametagStore implements NametagStore {
         Nametag nametag = null;
 
         try {
-            nametag = jdb.get(context.name() + "/" + id, Nametag.class);
+            nametag = jdb.get(context.getName() + "/" + id, Nametag.class);
         } catch (IOException e) {
             FancyVisuals.getFancyLogger().error("Failed to get nametag for id " + id);
             FancyVisuals.getFancyLogger().error(e);
@@ -48,7 +48,7 @@ public class JsonNametagStore implements NametagStore {
 
     @Override
     public void removeNametag(@NotNull String id) {
-        jdb.delete(context.name() + "/" + id);
+        jdb.delete(context.getName() + "/" + id);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class JsonNametagStore implements NametagStore {
         List<Nametag> nametags = new ArrayList<>();
 
         try {
-            jdb.getAll(context.name(), Nametag.class);
+            jdb.getAll(context.getName(), Nametag.class);
         } catch (IOException e) {
             FancyVisuals.getFancyLogger().error("Failed to get all nametags");
             FancyVisuals.getFancyLogger().error(e);

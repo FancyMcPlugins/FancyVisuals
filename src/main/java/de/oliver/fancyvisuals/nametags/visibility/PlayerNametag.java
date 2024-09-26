@@ -4,7 +4,9 @@ import de.oliver.fancysitula.api.entities.FS_Display;
 import de.oliver.fancysitula.api.entities.FS_RealPlayer;
 import de.oliver.fancysitula.api.entities.FS_TextDisplay;
 import de.oliver.fancysitula.factories.FancySitula;
+import de.oliver.fancyvisuals.FancyVisuals;
 import de.oliver.fancyvisuals.api.nametags.Nametag;
+import de.oliver.fancyvisuals.playerConfig.PlayerConfig;
 import me.dave.chatcolorhandler.ModernChatColorHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -53,6 +55,13 @@ public class PlayerNametag {
 
         if (!viewer.getLocation().getWorld().getName().equals(player.getLocation().getWorld().getName())) {
             return false;
+        }
+
+        if (player.getUniqueId().equals(viewer.getUniqueId())) {
+            PlayerConfig playerConfig = FancyVisuals.get().getPlayerConfigStore().getPlayerConfig(player.getUniqueId());
+            if (!playerConfig.showOwnNametag()) {
+                return false;
+            }
         }
 
         boolean dead = player.isDead();
@@ -104,7 +113,7 @@ public class PlayerNametag {
         }
 
         StringBuilder text = new StringBuilder();
-        for (String line : nametag.lines()) {
+        for (String line : nametag.textLines()) {
             text.append(line).append('\n');
         }
         text.append("<reset>");
