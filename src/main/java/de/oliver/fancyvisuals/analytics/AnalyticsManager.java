@@ -22,17 +22,23 @@ public class AnalyticsManager {
         fa.registerLogger(Logger.getGlobal());
 
         registerNametagMetrics();
+
+        fa.initialize();
     }
 
     private void registerNametagMetrics() {
         NametagRepository repo = FancyVisuals.get().getNametagRepository();
 
-        fa.registerNumberMetric(new MetricSupplier<>("nametag_count", () -> {
+        fa.registerNumberMetric(new MetricSupplier<>("nametag_count_total", () -> {
             double count = 0;
             for (Context ctx : Context.values()) {
                 count += repo.getStore(ctx).getNametags().size();
             }
             return count;
         }));
+        fa.registerNumberMetric(new MetricSupplier<>("nametag_count_player", () -> (double) repo.getStore(Context.PLAYER).getNametags().size()));
+        fa.registerNumberMetric(new MetricSupplier<>("nametag_count_group", () -> (double) repo.getStore(Context.GROUP).getNametags().size()));
+        fa.registerNumberMetric(new MetricSupplier<>("nametag_count_world", () -> (double) repo.getStore(Context.WORLD).getNametags().size()));
+        fa.registerNumberMetric(new MetricSupplier<>("nametag_count_server", () -> (double) repo.getStore(Context.SERVER).getNametags().size()));
     }
 }

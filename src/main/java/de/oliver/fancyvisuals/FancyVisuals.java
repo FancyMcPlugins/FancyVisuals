@@ -38,7 +38,7 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
 
     public FancyVisuals() {
         instance = this;
-        this.analyticsManager = new AnalyticsManager("oliver", "fancyvisuals", "123456");
+        this.analyticsManager = new AnalyticsManager("34c5a33d-0ff0-48b1-8b1c-53620a690c6e", "981ce185-c961-4618-bf61-71a8ed6c3962", "SxIBSDA2MDVkMGUwOTk3MzQ3NjCmP0UU");
         this.fancyVisualsConfig = new FancyVisualsConfig();
         this.nametagConfig = new NametagConfig();
     }
@@ -55,11 +55,11 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
     public void onLoad() {
         IFancySitula.LOGGER.setCurrentLevel(LogLevel.DEBUG);
 
-        analyticsManager.init();
-
+        // config
         fancyVisualsConfig.load();
         nametagConfig.load();
 
+        // worker executor
         this.workerExecutor = Executors.newFixedThreadPool(
                 fancyVisualsConfig.getAmountWorkerThreads(),
                 new ThreadFactoryBuilder()
@@ -74,6 +74,9 @@ public final class FancyVisuals extends JavaPlugin implements FancyVisualsAPI {
         // Nametags
         nametagRepository = new JsonNametagRepository();
         nametagScheduler = new PlayerNametagScheduler(workerExecutor, nametagConfig.getDistributionBucketSize());
+
+        // analytics
+        analyticsManager.init();
     }
 
     @Override
