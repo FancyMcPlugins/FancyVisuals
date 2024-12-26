@@ -15,7 +15,7 @@ plugins {
 runPaper.folia.registerTask()
 
 val supportedVersions =
-    listOf("1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1")
+    listOf("1.19.4", "1.20", "1.20.1", "1.20.2", "1.20.3", "1.20.4", "1.20.5", "1.20.6", "1.21", "1.21.1", "1.21.2", "1.21.3", "1.21.4")
 
 allprojects {
     group = "de.oliver"
@@ -39,7 +39,7 @@ dependencies {
     implementation(project(":api"))
 
     compileOnly("de.oliver:FancyLib:33") // loaded in FancyVisualLoader
-    compileOnly("de.oliver:FancySitula:0.0.9") // loaded in FancyVisualLoader
+    compileOnly("de.oliver:FancySitula:0.0.13") // loaded in FancyVisualLoader
     compileOnly("de.oliver.FancyAnalytics:api:0.0.8") // loaded in FancyVisualLoader
     compileOnly("de.oliver.FancyAnalytics:logger:0.0.5") // loaded in FancyVisualLoader
 
@@ -47,9 +47,9 @@ dependencies {
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
 
     // commands
-    compileOnly("org.incendo:cloud-core:2.0.0") // loaded in FancyVisualLoader
-    compileOnly("org.incendo:cloud-paper:2.0.0-beta.10") // loaded in FancyVisualLoader
-    compileOnly("org.incendo:cloud-annotations:2.0.0") // loaded in FancyVisualLoader
+    implementation("org.incendo:cloud-core:2.0.0")
+    implementation("org.incendo:cloud-paper:2.0.0-beta.10")
+    implementation("org.incendo:cloud-annotations:2.0.0")
     annotationProcessor("org.incendo:cloud-annotations:2.0.0")
 }
 
