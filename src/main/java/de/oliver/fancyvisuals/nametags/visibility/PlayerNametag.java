@@ -11,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.joml.Vector3f;
 import org.lushplugins.chatcolorhandler.ModernChatColorHandler;
 
 import java.util.HashSet;
@@ -94,6 +95,8 @@ public class PlayerNametag {
     }
 
     public void updateFor(Player viewer) {
+        fsTextDisplay.setTranslation(new Vector3f(0, 0.2f, 0));
+
         fsTextDisplay.setBillboard(FS_Display.Billboard.CENTER);
 
         Color bgColor = Color.fromARGB((int) Long.parseLong(nametag.backgroundColor().substring(1), 16));
@@ -116,7 +119,7 @@ public class PlayerNametag {
         for (String line : nametag.textLines()) {
             text.append(line).append('\n');
         }
-        text.append("<reset>");
+        text.deleteCharAt(text.length() - 1);
 
         fsTextDisplay.setText(ModernChatColorHandler.translate(text.toString(), player));
 
