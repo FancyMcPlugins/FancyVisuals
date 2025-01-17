@@ -48,7 +48,7 @@ public class PlayerNametagScheduler {
      * 25 seconds between subsequent executions.
      */
     public void init() {
-        schedulerExecutor.scheduleAtFixedRate(workload, 1000, 250, TimeUnit.MILLISECONDS);
+        schedulerExecutor.scheduleWithFixedDelay(workload, 1000, 250, TimeUnit.MILLISECONDS);
     }
 
     public void add(PlayerNametag nametag) {
