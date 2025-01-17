@@ -1,5 +1,7 @@
 # FancyVisuals
 
+**Do not use this plugin in production! It is still in development and may contain bugs and unfinished features.**
+
 This is a plugin to customise most visual components of your minecraft server. This includes the scoreboard, tablist,
 bossbar, actionbar, title, chat and nametags. This plugin is highly customisable and can be used to create a unique
 experience for your players.
