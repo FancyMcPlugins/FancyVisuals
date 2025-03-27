@@ -1,5 +1,12 @@
 # FancyVisuals
 
+> [!CAUTION]
+> This repository is no longer maintained and has been merged into our new monorepo: [https://github.com/FancyMcPlugins/fancyplugins](https://github.com/FancyMcPlugins/fancyplugins).
+>
+> For the latest updates, issues, and contributions, please visit the monorepo. This repo remains available for historical reference but will no longer receive updates.
+>
+> Read [this blog article](https://docs.fancyplugins.de/blog/why-monorepo/) to learn more about the reasons, why we switched to a monorepo.
+
 **Do not use this plugin in production! It is still in development and may contain bugs and unfinished features.**
 
 This is a plugin to customise most visual components of your minecraft server. This includes the scoreboard, tablist,
